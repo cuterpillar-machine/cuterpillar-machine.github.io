@@ -1,0 +1,19 @@
+# Site settings
+title: Cuterpillar machine
+url: "https://cuterpillar-machine.github.io"
+githuburl: https://github.com/cuterpillar-machine
+description: > #
+  Cuterpillar machine...
+
+# theme
+theme: jekyll-theme-cayman
+site:
+  favicon: "/assets/favicon.ico"
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+
+# Google services
+google_analytics: G-68D4G5CNZ4
