@@ -28,7 +28,7 @@ To run this website locally, you need to have Ruby and Jekyll installed.
 
 To start the Jekyll server locally:
 ```bash
-bundle exec jekyll serve
+bundle exec jekyll serve --incremental
 ```
 
 ### Access the Site

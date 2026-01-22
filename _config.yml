@@ -1,12 +1,14 @@
 # Site settings
 title: Cuterpillar machine
 url: "https://cuterpillar-machine.github.io"
+baseurl: ""
 githuburl: https://github.com/cuterpillar-machine
 description: > #
   Cuterpillar machine...
 
 # theme
 theme: jekyll-theme-cayman
+lang: en-US
 site:
   favicon: "/assets/favicon.ico"
 
