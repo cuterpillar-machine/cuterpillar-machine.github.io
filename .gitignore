@@ -1,6 +1,7 @@
 .idea/
-.jekyll-cache/
-.jekyll-metadata
 _site/
 vendor/
+.jekyll-cache/
+.jekyll-metadata
+
 

@@ -1,7 +1,46 @@
 ---
 layout: default
-title: Last versions
+title: Versions
+extra_css: /assets/css/versions.css
 ---
-<div class="versions">
-    Last versions
-</div>
+<article class="versions versions-table-container">
+    <p>Below is a list of all released versions of the Cuterpillar machine project.</p>
+    <section class="versions-list">
+        <table>
+            <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>Release Date</th>
+                    <th>Description</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% assign sorted_versions = site.versions | sort: "date" | reverse %}
+                {% for v in sorted_versions %}
+                <tr {% if forloop.index > site.versions_limit %}class="old-version"{% endif %}>
+                    <td><strong>{{ v.version }}</strong></td>
+                    <td>{{ v.date | date: "%Y-%m-%d %H:%M" }}</td>
+                    <td>{{ v.description }}</td>
+                    <td><a href="{{ v.url | relative_url }}">View details</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+    {% if sorted_versions.size > site.versions_limit %}
+    <section class="versions-controls text-center mt-20">
+        <button id="show-old-versions" class="btn btn-green">Show all versions</button>
+    </section>
+
+    <script>
+        document.getElementById('show-old-versions').addEventListener('click', function() {
+            var oldVersions = document.querySelectorAll('.old-version');
+            oldVersions.forEach(function(row) {
+                row.style.display = 'table-row';
+            });
+            this.parentElement.style.display = 'none';
+        });
+    </script>
+    {% endif %}
+</article>

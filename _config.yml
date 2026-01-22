@@ -5,6 +5,7 @@ baseurl: ""
 githuburl: https://github.com/cuterpillar-machine
 description: > #
   Cuterpillar machine...
+versions_limit: 3
 
 # theme
 theme: jekyll-theme-cayman
@@ -19,3 +20,9 @@ plugins:
 
 # Google services
 google_analytics: G-68D4G5CNZ4
+
+collections:
+  versions:
+    output: true
+    permalink: /versions/:path.html
+future: true

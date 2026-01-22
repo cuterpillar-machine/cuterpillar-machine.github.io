@@ -1,0 +1,28 @@
+---
+layout: default
+extra_css: /assets/css/versions.css
+---
+
+<article class="version-entry">
+    <h1>{{ page.title }}</h1>
+    <section class="version-metadata">
+        <p><strong>Release Date:</strong> {{ page.date | date: "%Y-%m-%d %H:%M" }}</p>
+        <p>{{ page.description }}</p>
+
+        <p>
+            <a href="{{ page.download_url }}" class="btn btn-green" target="_blank" rel="noopener noreferrer">
+                Download {{ page.version }}
+            </a>
+        </p>
+    </section>
+
+    <hr>
+    <section class="version-content">
+        {{ content }}
+    </section>
+    <hr>
+
+    <nav class="version-navigation">
+        <p><a href="{{ '/versions.html' | relative_url }}">&larr; Back to Versions</a></p>
+    </nav>
+</article>
