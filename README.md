@@ -2,6 +2,8 @@
 
 Visit our site https://cuterpillar-machine.github.io/
 
+[![Support](https://img.shields.io/badge/Support-Project-orange)](https://cuterpillar-machine.github.io/support.html)
+
 ## Local Development
 
 To run this website locally, you need to have Ruby and Jekyll installed.

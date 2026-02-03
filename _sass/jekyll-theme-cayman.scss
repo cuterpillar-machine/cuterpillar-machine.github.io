@@ -1,6 +1,7 @@
-@import "normalize";
-@import "rouge-github";
-@import "variables";
+@use "sass:color";
+@use "config" as *;
+@use "normalize" as *;
+@use "rouge-github" as *;
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
 
@@ -48,8 +49,8 @@ body {
     left: 10px;
     height: auto;
     width: auto;
-    background: invert($body-link-color);
-    outline: thick solid invert($body-link-color);
+    background: color.invert($body-link-color);
+    outline: thick solid color.invert($body-link-color);
   }
 }
 
@@ -376,4 +377,56 @@ a {
 
 .site-footer-credits {
   color: $blockquote-text-color;
+}
+
+// Custom styles
+.text-center {
+  text-align: center;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.btn-green {
+  color: #159957 !important;
+  border-color: #159957 !important;
+  background-color: transparent !important;
+
+  &:hover {
+    color: #ffffff !important;
+    background-color: #159957 !important;
+    text-decoration: none !important;
+  }
+}
+
+.versions-table-container {
+  table {
+    margin-bottom: 2rem;
+  }
+
+  .old-version {
+    display: none;
+  }
+}
+
+.version-entry {
+  .version-metadata {
+    margin-bottom: 2rem;
+    color: #606c71;
+  }
+
+  .version-content {
+    margin-top: 2rem;
+  }
+
+  .version-navigation {
+    margin-top: 2rem;
+  }
+}
+
+.home, .documentation {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 1.2rem;
 }

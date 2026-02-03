@@ -21,6 +21,12 @@ plugins:
 # Google services
 google_analytics: G-68D4G5CNZ4
 
+# WayForPay
+wayforpay_button_id: "123"
+
+# Monobank
+monobank_jar_id: "321"
+
 collections:
   versions:
     output: true
