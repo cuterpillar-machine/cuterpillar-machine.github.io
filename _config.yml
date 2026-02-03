@@ -31,4 +31,7 @@ collections:
   versions:
     output: true
     permalink: /versions/:path.html
+  documentations:
+    output: true
+    permalink: /documentations/:path.html
 future: true

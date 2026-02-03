@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+<article class="documentation-entry">
+    <h1>{{ page.title }}</h1>
+    <section class="documentation-content">
+        {{ content }}
+    </section>
+    <hr>
+
+    <nav class="documentation-content-navigation">
+        <div class="version-nav-links" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            {% if page.previous %}
+            <a href="{{ page.previous.url | relative_url }}">&larr; Previous: {{ page.previous.version }}</a>
+            {% else %}
+            <span></span>
+            {% endif %}
+            {% if page.next %}
+            <a href="{{ page.next.url | relative_url }}">Next: {{ page.next.version }} &rarr;</a>
+            {% endif %}
+        </div>
+        <p><a href="{{ '/documentation.html' | relative_url }}">&larr; Back to Documentations</a></p>
+    </nav>
+</article>

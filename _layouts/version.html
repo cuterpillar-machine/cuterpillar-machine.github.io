@@ -12,6 +12,10 @@ layout: default
             <a href="{{ page.download_url }}" class="btn btn-green" target="_blank" rel="noopener noreferrer">
                 Download {{ page.version }}
             </a>
+
+            <a href="/documentations/{{ page.version }}.html" class="btn btn-green">
+                Documentation {{ page.version }}
+            </a>
         </p>
     </section>
 
@@ -22,6 +26,16 @@ layout: default
     <hr>
 
     <nav class="version-navigation">
+        <div class="version-nav-links" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            {% if page.previous %}
+                <a href="{{ page.previous.url | relative_url }}">&larr; Previous: {{ page.previous.version }}</a>
+            {% else %}
+                <span></span>
+            {% endif %}
+            {% if page.next %}
+                <a href="{{ page.next.url | relative_url }}">Next: {{ page.next.version }} &rarr;</a>
+            {% endif %}
+        </div>
         <p><a href="{{ '/versions.html' | relative_url }}">&larr; Back to Versions</a></p>
     </nav>
 </article>

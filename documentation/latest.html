@@ -1,0 +1,19 @@
+---
+layout: null
+---
+{% assign latest_documentation = site.documentations | sort: "date" | last %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting to latest documentation...</title>
+    <link rel="canonical" href="{{ latest_documentation.url | relative_url }}">
+    <meta http-equiv="refresh" content="0; url={{ latest_documentation.url | relative_url }}">
+</head>
+<body>
+    <p>Redirecting to <a href="{{ latest_documentation.url | relative_url }}">{{ latest_documentation.url | relative_url }}</a>...</p>
+    <script>
+        window.location.href = "{{ latest_documentation.url | relative_url }}";
+    </script>
+</body>
+</html>

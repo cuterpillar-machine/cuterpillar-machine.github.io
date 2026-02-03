@@ -2,6 +2,11 @@
 layout: default
 title: Documentation
 ---
+{% assign latest_documentation = site.documentations | sort: "date" | last %}
 <div class="documentation">
-    Documentation
+    <h1>Documentation</h1>
+    <p>Welcome to the Cuterpillar machine documentation. Here you can find information on how to set up, use, and contribute to the project.</p>
+
+    <a href="{{ '/documentation/how-to-update-instructions' | relative_url }}">How to Update Instructions</a>
+    | <a href="{{ latest_documentation.url | relative_url }}">Latest documentation (Version {{ latest_documentation.version }})</a>
 </div>
