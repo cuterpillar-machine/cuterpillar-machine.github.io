@@ -1,0 +1,63 @@
+name: Add New Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number (e.g., 0.1.2)'
+        required: true
+      description:
+        description: 'Short description of the release'
+        required: true
+      date:
+        description: 'Release date (YYYY-MM-DD HH:MM:SS +0000)'
+        required: false
+      download_url:
+        description: 'Download URL'
+        required: true
+
+jobs:
+  add-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set date if not provided
+        id: set-date
+        run: |
+          if [ -z "${{ github.event.inputs.date }}" ]; then
+            echo "date=$(date -u +'%Y-%m-%d %H:%M:%S +0000')" >> $GITHUB_OUTPUT
+          else
+            echo "date=${{ github.event.inputs.date }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create version file
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          DESCRIPTION="${{ github.event.inputs.description }}"
+          DOWNLOAD_URL="${{ github.event.inputs.download_url }}"
+          DATE="${{ steps.set-date.outputs.date }}"
+          
+          sed -e "s/{{VERSION}}/$VERSION/g" \
+              -e "s/{{DESCRIPTION}}/$DESCRIPTION/g" \
+              -e "s|{{DOWNLOAD_URL}}|$DOWNLOAD_URL|g" \
+              -e "s/{{DATE}}/$DATE/g" \
+              _templates/version_template.md > _versions/$VERSION.md
+
+      - name: Create documentation file
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          DESCRIPTION="${{ github.event.inputs.description }}"
+          
+          sed -e "s/{{VERSION}}/$VERSION/g" \
+              -e "s/{{DESCRIPTION}}/$DESCRIPTION/g" \
+              _templates/documentation_template.md > _documentations/$VERSION.md
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add _versions/${{ github.event.inputs.version }}.md _documentations/${{ github.event.inputs.version }}.md _templates/*.md
+          git commit -m "Add version ${{ github.event.inputs.version }}"
+          git push

@@ -36,3 +36,12 @@ bundle exec jekyll serve --incremental
 ### Access the Site
 Open your browser and navigate to:
 [http://localhost:4000](http://localhost:4000)
+
+## Maintenance
+
+### Adding a New Version
+You can add a new version using the GitHub Action "Add New Version":
+1. Go to the **Actions** tab in the GitHub repository.
+2. Select **Add New Version** workflow.
+3. Click **Run workflow** and fill in the version details.
+4. The action will automatically create the version and documentation files.
