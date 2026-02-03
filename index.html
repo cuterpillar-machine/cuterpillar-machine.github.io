@@ -2,6 +2,26 @@
 layout: default
 title: Home page
 ---
-<div class="home">
-    Home page
+<div class="home text-center">
+    <section class="support-section">
+        <p>Support our project by donating via WayForPay or Monobank.</p>
+        <div class="mt-20">
+            <a href="https://secure.wayforpay.com/button/{{ site.wayforpay_button_id }}" class="btn btn-green" target="_blank" rel="noopener noreferrer">Support via WayForPay</a>
+            <a href="https://send.monobank.ua/jar/{{ site.monobank_jar_id }}" class="btn btn-green" target="_blank" rel="noopener noreferrer">Support via Monobank</a>
+        </div>
+    </section>
+
+    <hr>
+
+    <section class="latest-version-section">
+        {% assign latest_version = site.versions | sort: "date" | last %}
+        {% if latest_version %}
+        <h2>Latest Version: {{ latest_version.version }}</h2>
+        <a href="{{ '/version/latest.html' | relative_url }}">View Details</a>
+        <p>{{ latest_version.description }}</p>
+        <div class="mt-20">
+            <a href="{{ latest_version.download_url }}" class="btn btn-green" target="_blank" rel="noopener noreferrer">Download Now</a>
+        </div>
+        {% endif %}
+    </section>
 </div>

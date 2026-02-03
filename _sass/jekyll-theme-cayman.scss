@@ -1,5 +1,5 @@
 @use "sass:color";
-@use "config" as *;
+@use "button" as *;
 @use "normalize" as *;
 @use "rouge-github" as *;
 
@@ -388,15 +388,30 @@ a {
   margin-top: 20px;
 }
 
-.btn-green {
-  color: #159957 !important;
-  border-color: #159957 !important;
+.btn-green, .btn-blue {
   background-color: transparent !important;
 
   &:hover {
     color: #ffffff !important;
-    background-color: #159957 !important;
     text-decoration: none !important;
+  }
+}
+
+.btn-green {
+  color: #159957 !important;
+  border-color: #159957 !important;
+
+  &:hover {
+    background-color: #159957 !important;
+  }
+}
+
+.btn-blue {
+  color: #155799 !important;
+  border-color: #155799 !important;
+
+  &:hover {
+    background-color: #155799 !important;
   }
 }
 
