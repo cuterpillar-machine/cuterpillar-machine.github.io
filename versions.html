@@ -1,45 +1,65 @@
 ---
 layout: default
 title: Versions
+description: Review the complete release history of the Cuterpillar machine project, including version details and release dates.
 ---
-<article class="versions versions-table-container">
-    <p>Below is a list of all released versions of the Cuterpillar machine project.</p>
-    <section class="versions-list">
-        <table>
-            <thead>
-                <tr>
-                    <th>Version</th>
-                    <th>Release Date</th>
-                    <th>Description</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% assign sorted_versions = site.versions | sort: "date" | reverse %}
-                {% for v in sorted_versions %}
-                <tr {% if forloop.index > site.versions_limit %}class="old-version"{% endif %}>
-                    <td><strong>{{ v.version }}</strong></td>
-                    <td>{{ v.date | date: "%Y-%m-%d %H:%M" }}</td>
-                    <td>{{ v.description }}</td>
-                    <td><a href="{{ v.url | relative_url }}">View details</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </section>
+<div class="max-w-6xl mx-auto space-y-10">
+    <header class="text-center space-y-4">
+        <h1 class="text-4xl font-extrabold text-slate-900 dark:text-white">{{ site.versions_page.title }}</h1>
+        <p class="text-lg text-slate-600 dark:text-slate-400">
+            {{ site.versions_page.description }}
+        </p>
+    </header>
+
+    <div class="bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-sm uppercase tracking-wider font-semibold">
+                        <th class="px-6 py-4 border-b border-slate-200 dark:border-slate-800">{{ site.versions_page.table.version }}</th>
+                        <th class="px-6 py-4 border-b border-slate-200 dark:border-slate-800">{{ site.versions_page.table.date }}</th>
+                        <th class="px-6 py-4 border-b border-slate-200 dark:border-slate-800">{{ site.versions_page.table.description }}</th>
+                        <th class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 text-right">{{ site.versions_page.table.details }}</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                    {% assign sorted_versions = site.versions | sort: "date" | reverse %}
+                    {% for v in sorted_versions %}
+                    <tr class="{% if forloop.index > site.versions_limit %}old-version hidden{% endif %} hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                        <td class="px-6 py-4">
+                            <span class="font-bold text-slate-900 dark:text-white">{{ v.version }}</span>
+                        </td>
+                        <td class="px-6 py-4 text-sm text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                            {{ v.date | date: "%B %d, %Y" }}
+                        </td>
+                        <td class="px-6 py-4 text-slate-600 dark:text-slate-400">
+                            {{ v.description }}
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <a href="{{ v.url | relative_url }}" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">{{ site.versions_page.view_details }}</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     {% if sorted_versions.size > site.versions_limit %}
-    <section class="versions-controls text-center mt-20">
-        <button id="show-old-versions" class="btn btn-green">Show all versions</button>
-    </section>
+    <div id="versions-controls" class="text-center">
+        <button id="show-old-versions" class="inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-700 text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors">
+            {{ site.versions_page.show_all_button }}
+        </button>
+    </div>
 
     <script>
         document.getElementById('show-old-versions').addEventListener('click', function() {
             var oldVersions = document.querySelectorAll('.old-version');
             oldVersions.forEach(function(row) {
-                row.style.display = 'table-row';
+                row.classList.remove('hidden');
             });
-            this.parentElement.style.display = 'none';
+            document.getElementById('versions-controls').classList.add('hidden');
         });
     </script>
     {% endif %}
-</article>
+</div>

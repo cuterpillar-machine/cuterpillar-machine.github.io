@@ -1,12 +1,38 @@
 ---
 layout: default
 title: Documentation
+description: Access comprehensive documentation for Cuterpillar machine, including setup guides, usage instructions, and update procedures.
 ---
-{% assign latest_documentation = site.documentations | sort: "date" | last %}
-<div class="documentation">
-    <h1>Documentation</h1>
-    <p>Welcome to the Cuterpillar machine documentation. Here you can find information on how to set up, use, and contribute to the project.</p>
+<div class="max-w-4xl mx-auto space-y-12">
+    <header class="text-center space-y-4">
+        <h1 class="text-4xl font-extrabold text-slate-900 dark:text-white">Documentation</h1>
+        <p class="text-lg text-slate-600 dark:text-slate-400">
+            Welcome to the Cuterpillar machine documentation. Here you can find information on how to set up, use, and contribute to the project.
+        </p>
+    </header>
 
-    <a href="{{ '/documentation/how-to-update-instructions' | relative_url }}">How to Update Instructions</a>
-    | <a href="{{ latest_documentation.url | relative_url }}">Latest documentation (Version {{ latest_documentation.version }})</a>
+    <div class="grid gap-6 sm:grid-cols-2">
+        {% assign latest_documentation = site.documentations | sort: "date" | last %}
+        
+        <a href="{{ '/documentation/how-to-update-instructions' | relative_url }}" class="group block p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-500 shadow-sm transition-all">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 mb-2">
+                {{ site.documentation_page.how_to_update.title | default: 'How to Update Instructions' }}
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm">
+                {{ site.documentation_page.how_to_update.description | default: 'Learn how to keep your Cuterpillar machine instructions up to date.' }}
+            </p>
+        </a>
+
+        {% if latest_documentation %}
+        <a href="{{ latest_documentation.url | relative_url }}" class="group block p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-500 shadow-sm transition-all">
+            <div class="flex items-center justify-between mb-2">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400">Latest Documentation</h2>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900/30 dark:text-primary-400">
+                    v{{ latest_documentation.version }}
+                </span>
+            </div>
+            <p class="text-slate-600 dark:text-slate-400 text-sm">View the most recent documentation for the Cuterpillar machine.</p>
+        </a>
+        {% endif %}
+    </div>
 </div>

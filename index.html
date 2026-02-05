@@ -1,29 +1,66 @@
 ---
 layout: default
-title: Home page
+title: Home
+description: Cuterpillar machine is a modern project focused on simplicity and efficiency. Explore our documentation and latest releases.
 ---
-<div class="home text-center">
-
-    <section class="latest-version-section">
-        {% assign latest_version = site.versions | sort: "date" | last %}
-        {% if latest_version %}
-        <h2>Latest Version: {{ latest_version.version }}</h2>
-        <p><strong>Release Date:</strong> {{ latest_version.date | date: "%Y-%m-%d %H:%M" }}</p>
-        <p>{{ latest_version.description }}</p>
-        <div class="mt-20">
-            <a href="{{ '/version/latest.html' | relative_url }}" class="btn btn-green">View details</a>
-            <a href="{{ '/documentation/latest.html' | relative_url }}" class="btn btn-green">View Latest Version Details</a>
-        </div>
-        {% endif %}
+<div class="space-y-16">
+    <section class="text-center space-y-4">
+        <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
+            {{ site.title }}
+        </h1>
+        <p class="max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400">
+            {{ site.description }}
+        </p>
     </section>
 
-    <hr>
-
-    <section class="support-section">
-        <p>Support our project by donating via WayForPay or Monobank.</p>
-        <div class="mt-20">
-            <a href="https://secure.wayforpay.com/button/{{ site.wayforpay_button_id }}" class="btn btn-green" target="_blank" rel="noopener noreferrer">Support via WayForPay</a>
-            <a href="https://send.monobank.ua/jar/{{ site.monobank_jar_id }}" class="btn btn-green" target="_blank" rel="noopener noreferrer">Support via Monobank</a>
+    <section class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+        <div class="px-6 py-8 sm:p-10">
+            {% assign latest_version = site.versions | sort: "date" | last %}
+            {% if latest_version %}
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Latest Release</h2>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-primary-100 text-primary-800 dark:bg-primary-900/30 dark:text-primary-400">
+                    {{ latest_version.version }}
+                </span>
+            </div>
+            <div class="space-y-4">
+                <p class="text-sm text-slate-500 dark:text-slate-400">
+                    Released on <time datetime="{{ latest_version.date | date_to_xmlschema }}">{{ latest_version.date | date: "%B %d, %Y" }}</time>
+                </p>
+                <p class="text-slate-600 dark:text-slate-400">
+                    {{ latest_version.description }}
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="{{ '/version/latest.html' | relative_url }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors">
+                        View Version Details
+                    </a>
+                    <a href="{{ '/documentation/latest.html' | relative_url }}" class="inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-700 text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-colors">
+                        Read Documentation
+                    </a>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </section>
+
+    {% if site.support_page.wayforpay.button_id or site.support_page.monobank.jar_id %}
+    <section class="bg-primary-50 dark:bg-primary-900/10 rounded-2xl p-8 sm:p-10 border border-primary-100 dark:border-primary-900/20 text-center">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">Support the Project</h2>
+        <p class="text-slate-600 dark:text-slate-400 mb-8 max-w-xl mx-auto">
+            Your contributions help us maintain and improve the Cuterpillar machine. Support us via WayForPay or Monobank.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            {% if site.support_page.wayforpay.button_id %}
+            <a href="https://secure.wayforpay.com/button/{{ site.support_page.wayforpay.button_id }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 transition-colors shadow-sm" target="_blank" rel="noopener noreferrer">
+                Support via WayForPay
+            </a>
+            {% endif %}
+            {% if site.support_page.monobank.jar_id %}
+            <a href="https://send.monobank.ua/jar/{{ site.support_page.monobank.jar_id }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-sm" target="_blank" rel="noopener noreferrer">
+                Support via Monobank
+            </a>
+            {% endif %}
+        </div>
+    </section>
+    {% endif %}
 </div>

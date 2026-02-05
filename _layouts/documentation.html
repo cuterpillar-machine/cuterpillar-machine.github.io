@@ -1,25 +1,40 @@
 ---
 layout: default
 ---
+<article class="max-w-4xl mx-auto">
+    <header class="mb-10">
+        <h1 class="text-4xl font-extrabold text-slate-900 dark:text-white mb-4">{{ page.title }}</h1>
+        {% if page.version %}<p class="text-sm text-slate-500 dark:text-slate-400 mb-2">Version: {{ page.version }}</p>{% endif %}
+        <div class="h-1 w-20 bg-primary-600 rounded"></div>
+    </header>
 
-<article class="documentation-entry">
-    <h1>{{ page.title }}</h1>
-    <section class="documentation-content">
+    <div class="prose prose-slate dark:prose-invert prose-headings:scroll-mt-20 prose-a:text-primary-600 dark:prose-a:text-primary-400 max-w-none">
         {{ content }}
-    </section>
-    <hr>
+    </div>
 
-    <nav class="documentation-content-navigation">
-        <div class="version-nav-links" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+    <footer class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800">
+        <nav class="flex flex-col sm:flex-row justify-between gap-4">
             {% if page.previous %}
-            <a href="{{ page.previous.url | relative_url }}">&larr; Previous: {{ page.previous.version }}</a>
+            <a href="{{ page.previous.url | relative_url }}" class="group flex flex-col items-start p-4 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-500 transition-colors">
+                <span class="text-sm text-slate-500 dark:text-slate-400">&larr; {{ site.documentation_page.previous_label | default: 'Previous' }}</span>
+                <span class="font-medium text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ page.previous.version }}</span>
+            </a>
             {% else %}
-            <span></span>
+            <div></div>
             {% endif %}
+
             {% if page.next %}
-            <a href="{{ page.next.url | relative_url }}">Next: {{ page.next.version }} &rarr;</a>
+            <a href="{{ page.next.url | relative_url }}" class="group flex flex-col items-end p-4 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-500 transition-colors text-right">
+                <span class="text-sm text-slate-500 dark:text-slate-400">{{ site.documentation_page.next_label | default: 'Next' }} &rarr;</span>
+                <span class="font-medium text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ page.next.version }}</span>
+            </a>
             {% endif %}
+        </nav>
+        <div class="mt-8 text-center">
+            <a href="{{ '/documentation.html' | relative_url }}" class="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                {{ site.documentation_page.back_to_docs | default: 'Back to Documentations' }}
+            </a>
         </div>
-        <p><a href="{{ '/documentation.html' | relative_url }}">&larr; Back to Documentations</a></p>
-    </nav>
+    </footer>
 </article>

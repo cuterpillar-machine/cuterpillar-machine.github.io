@@ -1,8 +1,8 @@
 ---
 layout: version
 title: Version {{VERSION}}
-version: {{VERSION}}
 description: "{{DESCRIPTION}}"
+version: {{VERSION}}
 download_url: "{{DOWNLOAD_URL}}"
 date: {{DATE}}
 ---

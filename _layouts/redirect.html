@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+{% capture redirect_url %}{{ content | strip_html | strip }}{% endcapture %}<head>
+    <meta charset="UTF-8">
+    {% seo %}
+    <link rel="canonical" href="{{ redirect_url | relative_url }}">
+    <meta http-equiv="refresh" content="0; url={{ redirect_url | relative_url }}">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+    <p>{{ site.redirect_page.message }} <a href="{{ redirect_url | relative_url }}">{{ redirect_url | relative_url }}</a>...</p>
+    <script>
+        window.location.href = "{{ redirect_url | relative_url }}";
+    </script>
+
+    {% include footer.html %}
+</body>
+</html>

@@ -1,41 +1,59 @@
 ---
 layout: default
 ---
-
-<article class="version-entry">
-    <h1>{{ page.title }}</h1>
-    <section class="version-metadata">
-        <p><strong>Release Date:</strong> {{ page.date | date: "%Y-%m-%d %H:%M" }}</p>
-        <p>{{ page.description }}</p>
-
-        <p>
-            <a href="{{ page.download_url }}" class="btn btn-green" target="_blank" rel="noopener noreferrer">
-                Download {{ page.version }}
-            </a>
-
-            <a href="/documentations/{{ page.version }}.html" class="btn btn-green">
-                Documentation {{ page.version }}
-            </a>
-        </p>
-    </section>
-
-    <hr>
-    <section class="version-content">
-        {{ content }}
-    </section>
-    <hr>
-
-    <nav class="version-navigation">
-        <div class="version-nav-links" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-            {% if page.previous %}
-                <a href="{{ page.previous.url | relative_url }}">&larr; Previous: {{ page.previous.version }}</a>
-            {% else %}
-                <span></span>
-            {% endif %}
-            {% if page.next %}
-                <a href="{{ page.next.url | relative_url }}">Next: {{ page.next.version }} &rarr;</a>
-            {% endif %}
+<article class="max-w-4xl mx-auto">
+    <header class="mb-10">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+            <h1 class="text-4xl font-extrabold text-slate-900 dark:text-white">{{ page.title }}</h1>
+            <span class="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold bg-primary-100 text-primary-800 dark:bg-primary-900/30 dark:text-primary-400">
+                {{ page.version }}
+            </span>
         </div>
-        <p><a href="{{ '/versions.html' | relative_url }}">&larr; Back to Versions</a></p>
-    </nav>
+        <div class="flex items-center text-sm text-slate-500 dark:text-slate-400 mb-6">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y %H:%M" }}</time>
+        </div>
+        <p class="text-lg text-slate-600 dark:text-slate-400 mb-8">{{ page.description }}</p>
+
+        <div class="flex flex-wrap gap-4">
+            <a href="{{ page.download_url }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 transition-colors" target="_blank" rel="noopener noreferrer" onclick="if(window.ga) ga('send', 'event', 'Download', 'click', '{{ page.version }}');">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                {{ site.version_layout.download_button }} {{ page.version }}
+            </a>
+            <a href="/documentations/{{ page.version }}.html" class="inline-flex items-center px-6 py-3 border border-slate-300 dark:border-slate-700 text-base font-medium rounded-md text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                {{ site.version_layout.documentation_button }} {{ page.version }}
+            </a>
+        </div>
+    </header>
+
+    <div class="prose prose-slate dark:prose-invert max-w-none border-t border-slate-200 dark:border-slate-800 pt-10">
+        {{ content }}
+    </div>
+
+    <footer class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800">
+        <nav class="flex flex-col sm:flex-row justify-between gap-4">
+            {% if page.previous %}
+            <a href="{{ page.previous.url | relative_url }}" class="group flex flex-col items-start p-4 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-500 transition-colors">
+                <span class="text-sm text-slate-500 dark:text-slate-400">&larr; {{ site.version_layout.previous_label }}</span>
+                <span class="font-medium text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ page.previous.version }}</span>
+            </a>
+            {% else %}
+            <div></div>
+            {% endif %}
+
+            {% if page.next %}
+            <a href="{{ page.next.url | relative_url }}" class="group flex flex-col items-end p-4 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-500 transition-colors text-right">
+                <span class="text-sm text-slate-500 dark:text-slate-400">{{ site.version_layout.next_label }} &rarr;</span>
+                <span class="font-medium text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">{{ page.next.version }}</span>
+            </a>
+            {% endif %}
+        </nav>
+        <div class="mt-8 text-center">
+            <a href="{{ '/versions.html' | relative_url }}" class="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                {{ site.version_layout.back_to_versions }}
+            </a>
+        </div>
+    </footer>
 </article>

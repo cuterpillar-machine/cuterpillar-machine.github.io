@@ -1,9 +1,8 @@
 ---
-layout: default
+layout: documentation
 title: How to Update Instructions
+description: Step-by-step guide on how to update your Cuterpillar machine installation to the latest version.
 ---
-
-# How to Update Instructions
 
 Keeping your Cuterpillar machine up to date is essential for stability and access to the latest features. Follow these general steps to update your installation.
 

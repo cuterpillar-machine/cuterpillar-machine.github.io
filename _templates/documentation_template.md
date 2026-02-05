@@ -1,6 +1,7 @@
 ---
 layout: documentation
 title: Documentation for Version {{VERSION}}
+description: "{{DESCRIPTION}}"
 version: {{VERSION}}
 ---
 
