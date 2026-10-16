@@ -1,0 +1,14 @@
+{%- comment -%}
+  Formats include.date with month names of the page language.
+  include.time: also show HH:MM.
+{%- endcomment -%}
+{%- assign date_months = site.data.i18n[page.lang].months -%}
+{%- assign date_month = include.date | date: "%-m" | minus: 1 -%}
+{%- assign date_day = include.date | date: "%-d" -%}
+{%- assign date_year = include.date | date: "%Y" -%}
+{%- if page.lang == "en" -%}
+  {{ date_months[date_month] }} {{ date_day }}, {{ date_year }}
+{%- else -%}
+  {{ date_day }} {{ date_months[date_month] }} {{ date_year }}
+{%- endif -%}
+{%- if include.time %} {{ include.date | date: "%H:%M" }}{% endif -%}

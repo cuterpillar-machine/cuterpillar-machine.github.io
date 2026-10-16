@@ -1,0 +1,150 @@
+# English UI strings. Keys must match _data/i18n/uk.yml.
+brand: "Cuterpillar"
+lang_name: "English"
+lang_short: "EN"
+switch_language: "Мова / Language"
+url_prefix: "/en"
+
+months: [January, February, March, April, May, June, July, August, September, October, November, December]
+
+nav:
+  home: "Home"
+  documentation: "Documentation"
+  support: "Support"
+  versions: "Versions"
+
+home:
+  tagline: "The machine that measures, strips and cuts wire for you"
+  intro: "Set the length, the strip points and the quantity. The machine feeds the wire, scores the insulation exactly where you need it and cuts each piece. One after another, until the batch is done."
+  cta_download: "Download firmware"
+  cta_docs: "Documentation"
+  photo_placeholder: "Photo coming soon"
+
+  what:
+    title: "What it does"
+    items:
+      - title: "Measures"
+        text: "Feeds wire to a set length from 1 to 9999 mm."
+      - title: "Strips"
+        text: "Scores the insulation at up to 3 points: both ends and, for example, a mid-wire solder point."
+      - title: "Cuts"
+        text: "Cuts each piece and repeats for the whole batch: from 1 to 999 pieces."
+
+  how:
+    title: "How it works"
+    intro: "Each piece goes through the same cycle. Before every job the blade homes to the end-stop, so it always starts from a known position."
+    steps:
+      - title: "Feed"
+        text: "The stepper motor feeds wire up to the next cut point."
+      - title: "Score"
+        text: "The V-notch blades close just enough to cut the insulation without touching the copper. The depth follows from the copper diameter, picked on an AWG scale."
+      - title: "Repeat"
+        text: "Feed to the next point and score again, up to 3 points per piece."
+      - title: "Cut"
+        text: "The blades close fully and the piece is done. A stop request lets the current piece finish first."
+    diagram_alt: "Wire with three strip points and a cut at the end"
+
+  control:
+    title: "Two ways to control it"
+    items:
+      - title: "On the machine"
+        text: "Physical control panel with a built-in display: length, cut points, copper diameter, quantity and start, all in one bar."
+      - title: "From your phone"
+        text: "The machine serves its own web page. Open it in any browser, set up a job and watch its progress."
+    wifi_title: "Wi-Fi modes"
+    wifi:
+      - title: "Home Wi-Fi"
+        text: "The machine joins your router and is reachable at cut.local."
+      - title: "Direct connection"
+        text: "No router? The machine starts its own access point. The display shows QR codes for joining the network and opening the web page."
+      - title: "Wireless updates"
+        text: "New firmware is uploaded from the browser (OTA), no USB cable needed."
+
+  gallery:
+    title: "Photos and video"
+    note: "Photos and video of the machine are on the way."
+
+  specs:
+    title: "Specifications"
+    note: "Ranges of the firmware settings. Physical limits of the machine are still being measured."
+    rows:
+      - label: "Piece length"
+        value: "1–9999 mm"
+      - label: "Strip points per piece"
+        value: "up to 3"
+      - label: "Quantity per job"
+        value: "1–999"
+      - label: "Copper diameter setting"
+        value: "0.1–8.0 mm, step 0.1 (AWG scale)"
+      - label: "Control"
+        value: "Physical control panel with a built-in display, web UI"
+      - label: "Max wire size"
+        value: "TBD"
+
+  release:
+    title: "Latest release"
+    released_on: "Released on"
+    view_details: "Release details"
+    all_versions: "All versions"
+
+  support:
+    title: "Support the project"
+    text: "Your contributions help us build and improve the machine."
+
+documentation_page:
+  title: "Documentation"
+  description: "How to set up, use and update the machine."
+  latest_documentation_label: "Latest Documentation"
+  latest_documentation_description: "Documentation for the most recent release."
+  back_to_docs: "Back to Documentation"
+  previous_label: "Previous"
+  next_label: "Next"
+  version_label: "Version"
+  how_to_update:
+    title: "How to Update Instructions"
+    description: "Keep your machine's firmware up to date."
+
+support_page:
+  title: "Support Our Project"
+  description: "Your contributions help keep the project alive. Choose your preferred platform."
+  wayforpay:
+    title: "WayForPay"
+    description: "Fast and secure, supports various payment methods."
+    button_text: "Support via WayForPay"
+  monobank:
+    title: "Monobank Jar"
+    description: "Contribute directly to our Monobank Jar."
+    button_text: "Support via Monobank"
+
+version_layout:
+  version_label: "Version"
+  download_button: "Download"
+  documentation_button: "Documentation"
+  back_to_versions: "Back to Versions"
+  previous_label: "Previous Version"
+  next_label: "Next Version"
+
+versions_page:
+  title: "Release History"
+  description: "All released firmware versions."
+  table:
+    version: "Version"
+    date: "Release Date"
+    description: "Description"
+    details: "Details"
+  show_all_button: "Show all versions"
+  view_details: "View details"
+
+error_page:
+  title: "404"
+  heading: "Page not found"
+  description: "Sorry, we couldn’t find the page you’re looking for."
+  go_back_home: "Go back home"
+  contact_support: "Contact support"
+
+redirect_page:
+  message: "Redirecting to"
+
+footer:
+  all_rights_reserved: "All rights reserved."
+  generated_by: "Generated by"

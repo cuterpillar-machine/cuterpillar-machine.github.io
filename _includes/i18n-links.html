@@ -1,0 +1,32 @@
+{%- comment -%}
+  Links this page to its translations. Pages are matched by front matter `ref`,
+  collection documents (versions, documentations) by `version`.
+  A language without a translation falls back to its home page.
+  include.mode: "head" renders hreflang alternates, "switch" renders language switcher links
+  (include.class styles them).
+{%- endcomment -%}
+{%- if page.collection -%}
+  {%- assign i18n_siblings = site[page.collection] | where: "version", page.version -%}
+{%- elsif page.ref -%}
+  {%- assign i18n_siblings = site.pages | where: "ref", page.ref -%}
+{%- else -%}
+  {%- assign i18n_siblings = "" | split: "" -%}
+{%- endif -%}
+{%- for i18n_lang in site.languages -%}
+  {%- assign i18n_match = i18n_siblings | where: "lang", i18n_lang | first -%}
+  {%- if include.mode == "head" -%}
+    {%- if i18n_match %}
+    <link rel="alternate" hreflang="{{ i18n_lang }}" href="{{ i18n_match.url | absolute_url }}">
+      {%- if i18n_lang == site.lang %}
+    <link rel="alternate" hreflang="x-default" href="{{ i18n_match.url | absolute_url }}">
+      {%- endif -%}
+    {%- endif -%}
+  {%- elsif i18n_lang != page.lang -%}
+    {%- if i18n_match -%}
+      {%- assign i18n_url = i18n_match.url -%}
+    {%- else -%}
+      {%- assign i18n_url = site.data.i18n[i18n_lang].url_prefix | append: "/" -%}
+    {%- endif %}
+    <a href="{{ i18n_url | relative_url }}" hreflang="{{ i18n_lang }}" lang="{{ i18n_lang }}" title="{{ site.data.i18n[i18n_lang].lang_name }}" class="{{ include.class }}">{{ site.data.i18n[i18n_lang].lang_short }}</a>
+  {%- endif -%}
+{%- endfor -%}

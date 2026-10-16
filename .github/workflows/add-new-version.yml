@@ -7,8 +7,11 @@ on:
         description: 'Version number (e.g., 0.1.2)'
         required: true
       description:
-        description: 'Short description of the release'
+        description: 'Short description of the release (Ukrainian)'
         required: true
+      description_en:
+        description: 'Short description of the release (English); defaults to the Ukrainian one'
+        required: false
       date:
         description: 'Release date (YYYY-MM-DD HH:MM:SS +0000)'
         required: false
@@ -32,32 +35,36 @@ jobs:
             echo "date=${{ github.event.inputs.date }}" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create version file
+      - name: Create version and documentation files
+        env:
+          VERSION: ${{ github.event.inputs.version }}
+          DESCRIPTION_UK: ${{ github.event.inputs.description }}
+          DESCRIPTION_EN: ${{ github.event.inputs.description_en || github.event.inputs.description }}
+          DOWNLOAD_URL: ${{ github.event.inputs.download_url }}
+          DATE: ${{ steps.set-date.outputs.date }}
         run: |
-          VERSION="${{ github.event.inputs.version }}"
-          DESCRIPTION="${{ github.event.inputs.description }}"
-          DOWNLOAD_URL="${{ github.event.inputs.download_url }}"
-          DATE="${{ steps.set-date.outputs.date }}"
-          
-          sed -e "s/{{VERSION}}/$VERSION/g" \
-              -e "s/{{DESCRIPTION}}/$DESCRIPTION/g" \
-              -e "s|{{DOWNLOAD_URL}}|$DOWNLOAD_URL|g" \
-              -e "s/{{DATE}}/$DATE/g" \
-              _templates/version_template.md > _versions/$VERSION.md
+          # Ukrainian (default language) files go to the collection root, English ones to en/
+          for LANG in uk en; do
+            if [ "$LANG" = "uk" ]; then DIR=""; DESCRIPTION="$DESCRIPTION_UK"; else DIR="en/"; DESCRIPTION="$DESCRIPTION_EN"; fi
+            mkdir -p "_versions/$DIR" "_documentations/$DIR"
 
-      - name: Create documentation file
-        run: |
-          VERSION="${{ github.event.inputs.version }}"
-          DESCRIPTION="${{ github.event.inputs.description }}"
-          
-          sed -e "s/{{VERSION}}/$VERSION/g" \
-              -e "s/{{DESCRIPTION}}/$DESCRIPTION/g" \
-              _templates/documentation_template.md > _documentations/$VERSION.md
+            sed -e "s/{{VERSION}}/$VERSION/g" \
+                -e "s/{{DESCRIPTION}}/$DESCRIPTION/g" \
+                -e "s|{{DOWNLOAD_URL}}|$DOWNLOAD_URL|g" \
+                -e "s/{{DATE}}/$DATE/g" \
+                "_templates/version_template.$LANG.md" > "_versions/$DIR$VERSION.md"
+
+            sed -e "s/{{VERSION}}/$VERSION/g" \
+                -e "s/{{DESCRIPTION}}/$DESCRIPTION/g" \
+                "_templates/documentation_template.$LANG.md" > "_documentations/$DIR$VERSION.md"
+          done
 
       - name: Commit and push changes
+        env:
+          VERSION: ${{ github.event.inputs.version }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add _versions/${{ github.event.inputs.version }}.md _documentations/${{ github.event.inputs.version }}.md _templates/*.md
-          git commit -m "Add version ${{ github.event.inputs.version }}"
+          git add "_versions/$VERSION.md" "_versions/en/$VERSION.md" "_documentations/$VERSION.md" "_documentations/en/$VERSION.md"
+          git commit -m "Add version $VERSION"
           git push

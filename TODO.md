@@ -20,7 +20,7 @@ This list contains tasks and ideas for the Cuterpillar machine project, categori
 - [ ] **Tailwind Optimization**: Review `tailwind.config.js` to ensure only used styles are included in the final build (purge/content configuration).
 - [ ] **Breadcrumbs**: Add breadcrumb navigation to `_layouts/documentation.html` and `_layouts/version.html` to help users navigate back to the main lists.
 - [ ] **RSS Feed for Versions**: Implement an RSS feed specifically for project version updates.
-- [ ] **Localization (i18n)**: Implement multi-language support to make the documentation accessible to a global audience.
+- [x] **Localization (i18n)**: Implement multi-language support to make the documentation accessible to a global audience.
 
 ## ✨ Nice To Have
 - [ ] **Automated Testing**: Add a basic test suite (e.g., using GitHub Actions and a link checker) to verify that no broken links are introduced.
