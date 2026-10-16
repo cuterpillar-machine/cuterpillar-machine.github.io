@@ -1,16 +1,29 @@
 ---
 layout: documentation
-title: How to Update Instructions
-description: Step-by-step guide on how to update your Cuterpillar machine installation to the latest version.
+ref: how-to-update
+title: Інструкція з оновлення
+description: Як оновити прошивку машини Cuterpillar по Wi-Fi (OTA) з браузера.
 ---
 
-Keeping your Cuterpillar machine up to date is essential for stability and access to the latest features. Follow these general steps to update your installation.
+Прошивка оновлюється по Wi-Fi прямо з браузера, USB-кабель не потрібен.
 
-## General Update Procedure
+## Що завантажити
 
-1.  **Backup your configuration:** Before updating, always back up your `_config.yml` and any custom assets.
-2.  **Download the latest version:** Go to the [Versions page]({{ '/versions.html' | relative_url }}) and download the latest release archive.
-3.  **Extract the archive:** Overwrite the existing files in your project directory with the contents of the new archive.
-4.  **Install dependencies:** Run `bundle install` to ensure all required Ruby gems are up to date.
-5.  **Verify configuration:** Check if there are any new configuration options required in `_config.yml` by referring to the [Setup Instructions]({{ '/setup-instructions.html' | relative_url }}).
-6.  **Build and Serve:** Run `bundle exec jekyll serve` to verify that the site builds correctly.
+На [сторінці версій]({{ '/versions.html' | relative_url }}) завантажте файли потрібного релізу:
+
+- `firmware.bin`: сама прошивка;
+- `littlefs.bin`: вебінтерфейс машини.
+
+Оновлюйте обидва файли разом: прошивка та вебінтерфейс мають бути однієї версії.
+
+## Порядок оновлення
+
+1. **Дочекайтеся завершення завдання.** Поки машина ріже або виконує повернення в вихідну позицію, кнопка оновлення неактивна.
+2. **Відкрийте вебінтерфейс машини:**
+   - через домашній Wi-Fi: `http://cut.local` або IP-адреса, яку показує екран машини;
+   - у режимі прямого з'єднання: підключіться до мережі `Cuterpillar-XXXX` і відкрийте `http://192.168.4.1`.
+3. **Натисніть «Update Firmware».** Відкриється сторінка оновлення.
+4. **Завантажте `firmware.bin`.** Після завершення машина перезавантажиться сама.
+5. **Знову відкрийте сторінку оновлення і завантажте `littlefs.bin`.** Машина знову перезавантажиться.
+
+Деякі офісні та гостьові мережі блокують адресу `cut.local`. Тоді використовуйте IP-адресу з дисплея.

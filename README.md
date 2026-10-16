@@ -44,4 +44,14 @@ You can add a new version using the GitHub Action "Add New Version":
 1. Go to the **Actions** tab in the GitHub repository.
 2. Select **Add New Version** workflow.
 3. Click **Run workflow** and fill in the version details.
-4. The action will automatically create the version and documentation files.
+4. The action will automatically create the version and documentation files in both languages:
+   `_versions/<version>.md` and `_documentations/<version>.md` (Ukrainian, from `description`) and
+   `_versions/en/<version>.md` and `_documentations/en/<version>.md` (English, from `description_en`,
+   falling back to `description`).
+
+## Languages
+The site is Ukrainian at `/` and English at `/en/`.
+- UI strings live in `_data/i18n/uk.yml` and `_data/i18n/en.yml` (same keys in both).
+- A page's language comes from `_config.yml` `defaults`: everything under `en/`, `_versions/en/` and `_documentations/en/` is English.
+- Page markup lives once in `_includes/pages/`; `index.html` and `en/index.html` (and the other top-level pages) only set front matter.
+- Translations of a page share a front matter `ref`; versions and documentations are matched by `version`.

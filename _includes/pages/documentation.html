@@ -1,0 +1,36 @@
+{%- assign t = site.data.i18n[page.lang] -%}
+<div class="max-w-4xl mx-auto space-y-12">
+    <header class="text-center space-y-4">
+        <h1 class="text-4xl font-extrabold text-slate-900 dark:text-white">{{ t.documentation_page.title }}</h1>
+        <p class="text-lg text-slate-600 dark:text-slate-400">
+            {{ t.documentation_page.description }}
+        </p>
+    </header>
+
+    <div class="grid gap-6 sm:grid-cols-2">
+        {%- assign latest_version = site.versions | where: "lang", page.lang | sort: "date" | last -%}
+        {%- if latest_version -%}{%- assign latest_documentation = site.documentations | where: "lang", page.lang | where: "version", latest_version.version | first -%}{%- endif -%}
+        {%- assign how_to_update = site.pages | where: "ref", "how-to-update" | where: "lang", page.lang | first %}
+        
+        <a href="{{ how_to_update.url | relative_url }}" class="group block p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-500 shadow-sm transition-all">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 mb-2">
+                {{ t.documentation_page.how_to_update.title }}
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm">
+                {{ t.documentation_page.how_to_update.description }}
+            </p>
+        </a>
+
+        {% if latest_documentation %}
+        <a href="{{ latest_documentation.url | relative_url }}" class="group block p-6 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary-500 dark:hover:border-primary-500 shadow-sm transition-all">
+            <div class="flex items-center justify-between mb-2">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400">{{ t.documentation_page.latest_documentation_label }}</h2>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800 dark:bg-primary-900/30 dark:text-primary-400">
+                    v{{ latest_documentation.version }}
+                </span>
+            </div>
+            <p class="text-slate-600 dark:text-slate-400 text-sm">{{ t.documentation_page.latest_documentation_description }}</p>
+        </a>
+        {% endif %}
+    </div>
+</div>
