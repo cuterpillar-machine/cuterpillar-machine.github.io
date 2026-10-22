@@ -11,6 +11,7 @@
                 <div class="ml-10 flex items-baseline space-x-4">
                     <a href="{{ t.url_prefix | append: '/' | relative_url }}" class="px-3 py-2 rounded-md text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{{ t.nav.home }}</a>
                     <a href="{{ t.url_prefix | append: '/documentation.html' | relative_url }}" class="px-3 py-2 rounded-md text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{{ t.nav.documentation }}</a>
+                    <a href="{{ t.url_prefix | append: '/gallery.html' | relative_url }}" class="px-3 py-2 rounded-md text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{{ t.nav.gallery }}</a>
                     <a href="{{ t.url_prefix | append: '/support.html' | relative_url }}" class="px-3 py-2 rounded-md text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{{ t.nav.support }}</a>
                     <a href="{{ t.url_prefix | append: '/versions.html' | relative_url }}" class="px-3 py-2 rounded-md text-sm font-medium hover:text-primary-600 dark:hover:text-primary-400 transition-colors">{{ t.nav.versions }}</a>
                     {% include i18n-links.html mode="switch" class="px-3 py-2 rounded-md text-sm font-semibold border border-slate-300 dark:border-slate-700 hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-500 transition-colors" %}
@@ -35,6 +36,7 @@
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <a href="{{ t.url_prefix | append: '/' | relative_url }}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">{{ t.nav.home }}</a>
             <a href="{{ t.url_prefix | append: '/documentation.html' | relative_url }}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">{{ t.nav.documentation }}</a>
+            <a href="{{ t.url_prefix | append: '/gallery.html' | relative_url }}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">{{ t.nav.gallery }}</a>
             <a href="{{ t.url_prefix | append: '/support.html' | relative_url }}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">{{ t.nav.support }}</a>
             <a href="{{ t.url_prefix | append: '/versions.html' | relative_url }}" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">{{ t.nav.versions }}</a>
         </div>

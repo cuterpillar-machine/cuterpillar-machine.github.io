@@ -1,0 +1,67 @@
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign g = t.gallery_page -%}
+<div class="space-y-12">
+    <div class="text-center space-y-6">
+        <h1 class="text-4xl font-extrabold text-slate-900 dark:text-white sm:text-5xl">{{ g.title }}</h1>
+        <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">{{ g.description }}</p>
+    </div>
+
+    <!-- Thumbnails link to the full-size image; the script below opens it in a dialog instead -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {% for photo in site.data.gallery %}
+        {%- assign text = g.photos[photo.name] -%}
+        {%- assign full = '/assets/images/gallery/full/' | append: photo.name | append: '.webp' | relative_url -%}
+        <figure class="space-y-3{% if photo.wide %} sm:col-span-2 lg:col-span-3{% endif %}">
+            <a href="{{ full }}" class="gallery-item block overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-primary-500" data-full="{{ full }}" data-caption="{{ text.caption | escape }}" data-alt="{{ text.alt | escape }}">
+                {%- if photo.wide %}
+                {%- if forloop.first %}{% assign loading = "eager" %}{% else %}{% assign loading = "lazy" %}{% endif %}
+                {% include picture.html dir="gallery" name=photo.name alt=text.alt width="1600" height=photo.height loading=loading class="w-full h-auto object-cover transition-transform duration-300 hover:scale-[1.01]" %}
+                {%- else %}
+                {% include picture.html dir="gallery" name=photo.name alt=text.alt width="800" height="450" class="w-full h-auto aspect-video object-cover transition-transform duration-300 hover:scale-[1.03]" %}
+                {%- endif %}
+            </a>
+            <figcaption class="text-center text-slate-600 dark:text-slate-400">{{ text.caption }}</figcaption>
+        </figure>
+        {% endfor %}
+    </div>
+
+    <p class="text-center text-sm text-slate-500 dark:text-slate-400">{{ g.video_note }}</p>
+</div>
+
+<dialog id="gallery-dialog" class="max-w-none max-h-none w-full h-full m-0 p-0 bg-transparent backdrop:bg-slate-950/90">
+    <div class="w-full h-full flex flex-col items-center justify-center gap-4 p-4">
+        <img id="gallery-dialog-img" src="" alt="" class="max-w-full max-h-[calc(100vh-8rem)] object-contain rounded-lg shadow-2xl">
+        <p id="gallery-dialog-caption" class="text-slate-200 text-center"></p>
+        <div class="flex gap-4">
+            <a id="gallery-dialog-open" href="" target="_blank" rel="noopener" class="px-4 py-2 rounded-md text-sm font-medium text-white border border-slate-500 hover:bg-slate-800 transition-colors">{{ g.open_full }}</a>
+            <button id="gallery-dialog-close" type="button" class="px-4 py-2 rounded-md text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 transition-colors">{{ g.close }}</button>
+        </div>
+    </div>
+</dialog>
+
+<script>
+    (function () {
+        const dialog = document.getElementById('gallery-dialog');
+        if (!dialog.showModal) return; // no <dialog> support: links open the image directly
+        const img = document.getElementById('gallery-dialog-img');
+        const caption = document.getElementById('gallery-dialog-caption');
+        const open = document.getElementById('gallery-dialog-open');
+
+        document.querySelectorAll('.gallery-item').forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                img.src = link.dataset.full;
+                img.alt = link.dataset.alt;
+                caption.textContent = link.dataset.caption;
+                open.href = link.dataset.full;
+                dialog.showModal();
+            });
+        });
+        document.getElementById('gallery-dialog-close').addEventListener('click', function () { dialog.close(); });
+        // A click on the backdrop (outside the image and buttons) closes the dialog
+        dialog.addEventListener('click', function (event) {
+            if (event.target === dialog || event.target === dialog.firstElementChild) dialog.close();
+        });
+        dialog.addEventListener('close', function () { img.src = ''; });
+    })();
+</script>
