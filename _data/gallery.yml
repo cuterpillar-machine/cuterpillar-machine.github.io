@@ -1,0 +1,18 @@
+# Gallery page photos, in display order. Files live in assets/images/gallery/:
+# <name>.webp/.png are thumbnails (800 px wide, 1600 px for wide ones), full/<name>.webp is the full-size image.
+# Captions and alt texts: _data/i18n/*.yml gallery_page.photos.
+# wide: true spans the whole row (height: thumbnail height at 1600 px wide);
+# the rest go three per row at 16:9, so keep them in groups of three.
+# landing: true also shows the photo in the "Photos and video" section of the home page.
+- name: machine
+  wide: true
+  height: 900
+- name: mechanism
+  landing: true
+- name: panel-start
+- name: screen
+  landing: true
+- name: machine-top
+  wide: true
+  landing: true
+  height: 798

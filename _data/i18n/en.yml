@@ -12,6 +12,7 @@ nav:
   documentation: "Documentation"
   support: "Support"
   versions: "Versions"
+  gallery: "Gallery"
 
 home:
   tagline: "The machine that measures, strips and cuts wire for you"
@@ -19,6 +20,7 @@ home:
   cta_download: "Download firmware"
   cta_docs: "Documentation"
   photo_placeholder: "Photo coming soon"
+  hero_photo_alt: "The whole Cuterpillar machine on its wooden base: control panel, wire spool, guide rollers, feeder and blade mechanism"
 
   what:
     title: "What it does"
@@ -48,6 +50,8 @@ home:
     title: "Two ways to control it"
     items:
       - title: "On the machine"
+        photo: "panel-start"
+        photo_alt: "Control panel with the job summary on the display: 50 pcs × 90 mm, cuts at 2, 30, 88 mm, copper 1.2 mm"
         text: "Physical control panel with a built-in display: length, cut points, copper diameter, quantity and start, all in one bar."
       - title: "From your phone"
         text: "The machine serves its own web page. Open it in any browser, set up a job and watch its progress."
@@ -62,16 +66,17 @@ home:
 
   gallery:
     title: "Photos and video"
-    note: "Photos and video of the machine are on the way."
+    note: "Video is on the way."
+    all_photos: "All photos"
 
   specs:
     title: "Specifications"
-    note: "Ranges of the firmware settings. Physical limits of the machine are still being measured."
+    note: "Most rows are firmware setting ranges. Max wire size is the physical limit: thicker wire does not fit between the blades."
     rows:
       - label: "Piece length"
         value: "1–9999 mm"
       - label: "Strip points per piece"
-        value: "up to 3"
+        value: "up to 3 (firmware limit, not a hardware one)"
       - label: "Quantity per job"
         value: "1–999"
       - label: "Copper diameter setting"
@@ -79,7 +84,7 @@ home:
       - label: "Control"
         value: "Physical control panel with a built-in display, web UI"
       - label: "Max wire size"
-        value: "TBD"
+        value: "10 AWG with silicone insulation (copper ≈ 2.6 mm diameter, ≈ 5.3 mm² cross-section)"
 
   release:
     title: "Latest release"
@@ -90,6 +95,29 @@ home:
   support:
     title: "Support the project"
     text: "Your contributions help us build and improve the machine."
+
+gallery_page:
+  title: "Gallery"
+  description: "The machine up close. Click a photo to see it full size."
+  open_full: "Open full size"
+  close: "Close"
+  video_note: "Video is on the way."
+  photos:
+    machine:
+      caption: "The whole machine"
+      alt: "Cuterpillar on its wooden base: control panel, wire spool, guide rollers, feeder and blade mechanism"
+    machine-top:
+      caption: "Top view"
+      alt: "Cuterpillar from above: control panel, wire spool, guide rollers, guide tube, feeder and blades"
+    mechanism:
+      caption: "Feeder and blades"
+      alt: "Wire feeder, V-notch blades and lead screw up close"
+    panel-start:
+      caption: "Ready to start"
+      alt: "Display showing the job summary: 50 pcs × 90 mm, cuts at 2, 30, 88 mm, copper 1.2 mm"
+    screen:
+      caption: "Display close-up"
+      alt: "Control panel display showing 3 cuts at 2, 30 and 88 mm, with the menu icons below"
 
 documentation_page:
   title: "Documentation"

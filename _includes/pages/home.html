@@ -20,11 +20,7 @@
                 </a>
             </div>
         </div>
-        <!-- TODO: replace with a photo of the machine -->
-        <div class="aspect-[4/3] rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 flex flex-col items-center justify-center gap-3 text-slate-400 dark:text-slate-500">
-            <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-            <span class="text-sm">{{ h.photo_placeholder }}</span>
-        </div>
+        {% include picture.html name="machine" alt=h.hero_photo_alt width="1600" height="900" loading="eager" class="w-full h-auto aspect-video object-cover rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800" %}
     </section>
 
     <!-- What it does -->
@@ -90,8 +86,12 @@
         <div class="grid gap-6 md:grid-cols-2">
             {% for item in h.control.items %}
             <div class="p-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                {% if item.photo %}
+                {% include picture.html name=item.photo alt=item.photo_alt width="1280" height="720" class="w-full h-auto aspect-video object-cover rounded-lg" %}
+                {% else %}
                 <!-- TODO: replace with a photo or screenshot -->
                 <div class="aspect-video rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center text-sm text-slate-400 dark:text-slate-500">{{ h.photo_placeholder }}</div>
+                {% endif %}
                 <h3 class="text-xl font-bold text-slate-900 dark:text-white">{{ item.title }}</h3>
                 <p class="text-slate-600 dark:text-slate-400">{{ item.text }}</p>
             </div>
@@ -116,11 +116,21 @@
             <h2 class="text-3xl font-bold text-slate-900 dark:text-white">{{ h.gallery.title }}</h2>
             <p class="text-slate-600 dark:text-slate-400">{{ h.gallery.note }}</p>
         </div>
-        <!-- TODO: replace placeholders with photos / a video embed -->
-        <div class="grid gap-4 grid-cols-2 lg:grid-cols-4">
-            {% for i in (1..4) %}
-            <div class="aspect-square rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900"></div>
+        <!-- TODO: add a video embed -->
+        {%- assign landing_photos = site.data.gallery | where: "landing", true %}
+        <div class="grid gap-6 sm:grid-cols-3">
+            {% for photo in landing_photos %}
+            {%- assign text = t.gallery_page.photos[photo.name] %}
+            <figure class="space-y-2">
+                {% include picture.html dir="gallery" name=photo.name alt=text.alt width="800" height="450" class="w-full h-auto aspect-video object-cover rounded-xl border border-slate-200 dark:border-slate-800" %}
+                <figcaption class="text-sm text-center text-slate-600 dark:text-slate-400">{{ text.caption }}</figcaption>
+            </figure>
             {% endfor %}
+        </div>
+        <div class="text-center">
+            <a href="{{ t.url_prefix | append: '/gallery.html' | relative_url }}" class="inline-flex items-center px-6 py-3 border border-slate-300 dark:border-slate-700 text-base font-medium rounded-md text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+                {{ h.gallery.all_photos }}
+            </a>
         </div>
     </section>
 

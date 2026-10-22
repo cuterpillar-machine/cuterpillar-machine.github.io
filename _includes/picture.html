@@ -1,0 +1,10 @@
+{%- comment -%}
+Photo: WebP with PNG fallback, both in /assets/images/<dir>/.
+Params: name (file name without extension), dir (default "machine"), alt, width, height, class, loading (default "lazy").
+{%- endcomment -%}
+{%- assign dir = include.dir | default: 'machine' -%}
+{%- assign base = '/assets/images/' | append: dir | append: '/' | append: include.name -%}
+<picture>
+    <source srcset="{{ base | append: '.webp' | relative_url }}" type="image/webp">
+    <img src="{{ base | append: '.png' | relative_url }}" alt="{{ include.alt | escape }}" width="{{ include.width }}" height="{{ include.height }}" loading="{{ include.loading | default: 'lazy' }}" decoding="async" class="{{ include.class }}">
+</picture>
